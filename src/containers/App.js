@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {Grid, Row} from 'react-bootstrap';
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import Lane from './Lane';
 import Toolbar from './Toolbar';
 import '../App.css';
+
 
 class App extends Component {
   render() {
@@ -21,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);

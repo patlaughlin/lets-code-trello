@@ -76,6 +76,7 @@ body {
   box-shadow: 1px 1px 1px solid #ababab;
   border-radius: 3px;
   word-wrap: break-word;
+  cursor: move;
   @at-root #{&}__title {
     font-weight: bold;
     font-size: 16px;

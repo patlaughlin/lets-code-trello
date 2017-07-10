@@ -57,7 +57,8 @@ body {
   background: white;
   box-shadow: 1px 1px 1px solid #ababab;
   border-radius: 3px;
-  word-wrap: break-word; }
+  word-wrap: break-word;
+  cursor: move; }
   .card__title {
     font-weight: bold;
     font-size: 16px; }
