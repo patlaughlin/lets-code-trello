@@ -2,29 +2,7 @@ import * as ActionTypes from '../action_types';
 import _ from 'lodash'
 
 const initState = {
-  cards: [
-    {
-      id: _.uniqueId(),
-      createdAt: new Date(),
-      laneId: 0,
-      title: "foobar",
-      description: "asdsdsdsdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-    },
-    {
-      id: _.uniqueId(),
-      createdAt: new Date(),
-      laneId: 0,
-      title: "foobar",
-      description: "asdsdsdsdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-    },
-    {
-      id: _.uniqueId(),
-      createdAt: new Date(),
-      laneId: 0,
-      title: "foobar",
-      description: "asdsdsdsdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-    }
-  ]
+  cards: []
 };
 
 const userReducer = (state = initState, action) => {
