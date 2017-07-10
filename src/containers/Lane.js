@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Col, Row, Button} from 'react-bootstrap';
 import {Field} from 'redux-form';
 import {connect} from 'react-redux';
@@ -9,6 +10,13 @@ import CardForm from '../components/CardForm';
 import Card from '../components/Card';
 
 class Lane extends Component {
+  static propTypes = {
+    laneTitle: PropTypes.string.isRequired,
+    laneId: PropTypes.number.isRequired,
+    addCard: PropTypes.func,
+    cards: PropTypes.array,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -30,13 +38,13 @@ class Lane extends Component {
 
 
   render() {
-    const {cards, addCard, laneId} = this.props;
+    const {cards, addCard, laneId, laneTitle} = this.props;
     return (
       <Col sm={4}>
         <div className="lane">
-          <Row>
+          <Row className="lane__title-bar">
             <Col sm={10}>
-              <h1 className="lane__title">Lane Title</h1>
+              <h1 className="lane__title">{laneTitle}</h1>
             </Col>
             <Col sm={2}>
               <Button className="pull-right glyphicon glyphicon-plus"

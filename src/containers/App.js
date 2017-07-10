@@ -11,8 +11,8 @@ class App extends Component {
         <Toolbar/>
         <Grid>
           <Row>
-            {[1, 2, 3].map((el, i) => {
-              return <Lane key={i} laneId={i}/>
+            {['To Do', 'In Progress', 'Done'].map((title, i) => {
+              return <Lane laneTitle={title} key={i} laneId={i}/>
             })}
           </Row>
         </Grid>

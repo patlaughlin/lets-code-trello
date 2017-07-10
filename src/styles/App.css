@@ -1,12 +1,12 @@
 body {
   background: #0079bf;
+  color: #4d4d4d;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  overflow-x: auto;
-  overflow-y: hidden; }
+  overflow-x: auto; }
 
 .toolbar {
   background: #026AA7;
@@ -19,6 +19,8 @@ body {
   padding: 20px;
   background: #d9d9d9;
   border-radius: 3px; }
+  .lane__title-bar {
+    margin-bottom: 20px; }
   .lane__title {
     margin-top: 0;
     font-size: 18px;
@@ -48,3 +50,16 @@ body {
       font-size: 13px;
       top: 0;
       left: 0; }
+
+.card {
+  padding: 10px;
+  margin-bottom: 20px;
+  background: white;
+  box-shadow: 1px 1px 1px solid #ababab;
+  border-radius: 3px;
+  word-wrap: break-word; }
+  .card__title {
+    font-weight: bold;
+    font-size: 16px; }
+  .card__description {
+    font-size: 16px; }

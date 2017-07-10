@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actions';
 import {bindActionCreators} from 'redux';
-import {Button} from 'react-bootstrap';
+import {Button, FormGroup} from 'react-bootstrap';
 import {Field, reduxForm, getFormValues} from 'redux-form';
+import PropTypes from 'prop-types';
 import Input from '../components/Input';
 
 const validate = values => {
@@ -15,6 +16,11 @@ const validate = values => {
 }
 
 class CardForm extends Component {
+  static propTypes = {
+    laneId: PropTypes.number.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {}
@@ -24,19 +30,22 @@ class CardForm extends Component {
     let {handleSubmit, onSubmit} = this.props;
     return (
       <form onSubmit={handleSubmit(onSubmit)} style={{marginTop: 0}}>
-        <Field
-          type="text"
-          component={Input}
-          name="title"
-          label="Title"
-        />
+        <FormGroup>
+          <Field
+            type="text"
+            component={Input}
+            name="title"
+            label="Title"
+          />
 
-        <Field
-          type="textarea"
-          component={Input}
-          name="description"
-          label="Description"
-        />
+          <Field
+            type="textarea"
+            componentClass="textarea"
+            component={Input}
+            name="description"
+            label="Description"
+          />
+        </FormGroup>
         <Button type="submit">Submit</Button>
       </form>
     );
