@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import moment from 'moment';
 
-const cardStyle = {
-}
+class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
 
-class App extends Component {
   render() {
+    const {card: {title, description, createdAt}} = this.props;
     return (
-      <div style={cardStyle}>
-        <h1>Card</h1>
+      <div>
+        <time>{moment(createdAt).format('MM/DD/YYYY')}</time>
+        <h1>{title}</h1>
+        <p>{description}</p>
       </div>
     );
   }
 }
 
-export default App;
+export default Card;

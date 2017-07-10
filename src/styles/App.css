@@ -23,3 +23,28 @@ body {
     margin-top: 0;
     font-size: 18px;
     font-weight: bold; }
+
+.warning {
+  color: #F23B4F;
+  font-size: 15px; }
+  .warning.text {
+    position: relative;
+    left: 18px;
+    top: 4px; }
+
+.error-container {
+  position: absolute;
+  background: #363636;
+  bottom: -11px;
+  left: 10px;
+  padding: 0 5px;
+  width: auto !important; }
+  .error-container div {
+    display: inline-block;
+    width: auto; }
+  .error-container span {
+    margin: 0 !important; }
+    .error-container span.warning {
+      font-size: 13px;
+      top: 0;
+      left: 0; }

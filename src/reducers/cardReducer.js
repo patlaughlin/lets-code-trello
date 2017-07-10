@@ -8,11 +8,14 @@ const initState = {
 const userReducer = (state = initState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_CARD: {
-      const {laneId} = action.payload
+      const {laneId, title, description, createdAt} = action.payload
       return {
         ...state, cards: [...state.cards, {
           id: _.uniqueId(),
-          laneId
+          createdAt,
+          laneId,
+          title,
+          description
         }]
       }
     }
