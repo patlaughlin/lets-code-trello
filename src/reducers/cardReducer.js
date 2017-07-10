@@ -4,18 +4,21 @@ import _ from 'lodash'
 const initState = {
   cards: [
     {
+      id: _.uniqueId(),
       createdAt: new Date(),
       laneId: 0,
       title: "foobar",
       description: "asdsdsdsdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
     },
     {
+      id: _.uniqueId(),
       createdAt: new Date(),
       laneId: 0,
       title: "foobar",
       description: "asdsdsdsdassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
     },
     {
+      id: _.uniqueId(),
       createdAt: new Date(),
       laneId: 0,
       title: "foobar",
@@ -37,6 +40,20 @@ const userReducer = (state = initState, action) => {
           description
         }]
       }
+    }
+
+    case ActionTypes.TRANSITION_CARD_TO_LANE: {
+      const {laneId, cardId} = action.payload
+
+      const cards = state.cards.map(card => {
+        if (card.id === cardId) {
+          return {...card, laneId};
+        } else {
+          return card;
+        }
+      })
+
+      return {...state, cards}
     }
 
     default:

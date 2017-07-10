@@ -77,6 +77,10 @@ body {
   border-radius: 3px;
   word-wrap: break-word;
   cursor: move;
+  @at-root #{&}--is-dragging {
+    transform: rotateZ(2deg);
+    box-shadow: 4px 4px 4px gray;
+  }
   @at-root #{&}__title {
     font-weight: bold;
     font-size: 16px;
@@ -84,4 +88,5 @@ body {
   @at-root #{&}__description {
     font-size: 16px;
   }
+
 }

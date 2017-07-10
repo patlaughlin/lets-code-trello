@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {DropTarget} from 'react-dnd';
 import {Col, Row, Button} from 'react-bootstrap';
-import {Field} from 'redux-form';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions';
@@ -12,15 +11,16 @@ import Card from '../components/Card';
 
 const laneTarget = {
   drop(props) {
-    console.log(props)
-    return true;
+    return {
+      laneId: props.laneId
+    }
   },
 };
 
 function collect(connect, monitor) {
-  console.log(connect, monitor);
   return {
     connectDropTarget: connect.dropTarget(),
+    card: monitor.getItem(),
     isOver: monitor.isOver()
   };
 }
@@ -54,7 +54,7 @@ class Lane extends Component {
 
 
   render() {
-    const {cards, addCard, laneId, laneTitle, connectDropTarget, isOver} = this.props;
+    const {cards, addCard, laneId, laneTitle, transitionCardToLane, connectDropTarget, isOver} = this.props;
     return connectDropTarget(
       <div>
         <Col sm={4}>
@@ -80,7 +80,7 @@ class Lane extends Component {
                 {cards.filter(card => {
                   return card.laneId === laneId
                 }).map((card, i) => {
-                  return <Card key={i} card={card}/>;
+                  return <Card key={i} card={card} transitionCardToLane={transitionCardToLane}/>;
                 })}
               </Col>
             </Row>
@@ -91,7 +91,6 @@ class Lane extends Component {
   }
 }
 
-Lane = DropTarget('CARD', laneTarget, collect)(Lane);
 
 const mapStateToProps = state => ({
   cards: state.cardReducer.cards
@@ -100,6 +99,8 @@ const mapStateToProps = state => ({
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
+
+Lane = DropTarget('CARD', laneTarget, collect)(Lane);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lane);
 

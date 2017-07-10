@@ -59,6 +59,9 @@ body {
   border-radius: 3px;
   word-wrap: break-word;
   cursor: move; }
+  .card--is-dragging {
+    transform: rotateZ(2deg);
+    box-shadow: 4px 4px 4px gray; }
   .card__title {
     font-weight: bold;
     font-size: 16px; }
