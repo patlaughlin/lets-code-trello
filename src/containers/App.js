@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
+import {Grid, Row} from 'react-bootstrap';
 import Lane from './Lane';
+import Toolbar from './Toolbar';
 import '../App.css';
-
-const appStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gridGap: '10px',
-  gridAutoRows: 'minmax(100px, auto)'
-}
 
 class App extends Component {
   render() {
     return (
-      <div style={appStyle}>
-        {[1, 2, 3].map((el, i) => {
-          return <Lane key={i}/>
-        })}
+      <div>
+        <Toolbar/>
+        <Grid>
+          <Row>
+            {[1, 2, 3].map((el, i) => {
+              return <Lane key={i} laneId={i}/>
+            })}
+          </Row>
+        </Grid>
       </div>
     );
   }

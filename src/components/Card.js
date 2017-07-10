@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
 const cardStyle = {
-  color: 'red',
-  outline: '1px solid red'
 }
 
 class App extends Component {

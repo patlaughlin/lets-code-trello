@@ -1,11 +1,20 @@
 import * as ActionTypes from '../action_types';
+import _ from 'lodash'
 
-const initState = {};
+const initState = {
+  cards: []
+};
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
-    case ActionTypes.LOGIN_REQUEST_SUCCESS: {
-      return {};
+    case ActionTypes.ADD_CARD: {
+      const {laneId} = action.payload
+      return {
+        ...state, cards: [...state.cards, {
+          id: _.uniqueId(),
+          laneId
+        }]
+      }
     }
 
     default:

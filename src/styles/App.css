@@ -1,0 +1,25 @@
+body {
+  background: #0079bf;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.toolbar {
+  background: #026AA7;
+  border: none;
+  text-align: center; }
+  .toolbar .navbar-brand {
+    color: white; }
+
+.lane {
+  padding: 20px;
+  background: #d9d9d9;
+  border-radius: 3px; }
+  .lane__title {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold; }
