@@ -104,6 +104,7 @@ class Card extends Component {
         <CardForm
           onSubmit={this.submitEditCard}
           cancel={_ => this.setState({isEditing: false})}
+          initialValues={this.props.card}
           laneId={laneId}/>
         }
       </article>
