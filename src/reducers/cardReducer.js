@@ -38,8 +38,9 @@ const userReducer = (state = initState, action) => {
     case ActionTypes.REMOVE_CARD: {
       const {id} = action.payload
 
-      const cards = state.cards.map(card => {
-        return card.id !== id
+      const cards = state.cards.filter(card => {
+        console.log(card.id, id)
+        return _.parseInt(card.id) !== _.parseInt(id);
       })
 
       return {...state, cards}
