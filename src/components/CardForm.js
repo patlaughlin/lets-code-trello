@@ -28,7 +28,7 @@ class CardForm extends Component {
   }
 
   render() {
-    let {handleSubmit, onSubmit} = this.props;
+    let {handleSubmit, onSubmit, pristine, submitting} = this.props;
     return (
       <form className="card-form" onSubmit={handleSubmit(onSubmit)} style={{marginTop: 0}}>
         <Row>
@@ -56,6 +56,7 @@ class CardForm extends Component {
             <Button className="pull-left"
                     onClick={this.props.cancel}>Cancel</Button>
             <Button className="pull-right"
+                    disabled={pristine || submitting}
                     type="submit">Submit</Button>
           </Col>
         </Row>
