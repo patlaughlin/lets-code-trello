@@ -8,6 +8,7 @@ import * as actionCreators from '../actions';
 import moment from 'moment';
 import CardForm from '../components/CardForm';
 import Card from '../components/Card';
+import _ from 'lodash';
 
 const laneTarget = {
   drop(props) {
@@ -54,7 +55,17 @@ class Lane extends Component {
 
 
   render() {
-    const {cards, addCard, laneId, laneTitle, transitionCardToLane, connectDropTarget, isOver} = this.props;
+    const {
+            cards,
+            laneId,
+            editCard,
+            removeCard,
+            laneTitle, card,
+            transitionCardToLane,
+            connectDropTarget,
+            isOver
+          } = this.props;
+
     return connectDropTarget(
       <div>
         <Col sm={4}>
@@ -69,18 +80,24 @@ class Lane extends Component {
               </Col>
             </Row>
             <Row>
-
-              {this.state.isEditingNewCard &&
-              <CardForm
-                onSubmit={this.submitEditNewCard}
-                laneId={laneId}/>
-              }
-
               <Col sm={12}>
+                {(isOver && _.parseInt(card.laneId) !== _.parseInt(laneId)) &&
+                <div className="drag-placeholder">&nbsp;</div>
+                }
+                {this.state.isEditingNewCard &&
+                <CardForm
+                  onSubmit={this.submitEditNewCard}
+                  cancel={_ => this.setState({isEditingNewCard: false})}
+                  laneId={laneId}/>
+                }
                 {cards.filter(card => {
                   return card.laneId === laneId
                 }).map((card, i) => {
-                  return <Card key={i} card={card} transitionCardToLane={transitionCardToLane}/>;
+                  return <Card editCard={editCard}
+                               removeCard={removeCard}
+                               key={i}
+                               card={card}
+                               transitionCardToLane={transitionCardToLane}/>;
                 })}
               </Col>
             </Row>

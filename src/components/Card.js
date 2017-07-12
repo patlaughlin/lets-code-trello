@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
+import CardForm from './CardForm';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import {DragSource} from 'react-dnd';
-import _ from 'lodash';
 
 const cardSource = {
   beginDrag(props) {
-    console.log(props)
+    const {card} = props;
     return {
-      id: props.card.id,
+      id: card.id,
+      laneId: card.laneId
     }
   },
 
   isDragging(props, monitor) {
-    console.log(monitor.getItem().id, _.parseInt(props.card.id));
     return monitor.getItem().id === props.card.id;
   },
 
@@ -40,17 +41,71 @@ function collect(connect, monitor) {
 class Card extends Component {
   static propTypes = {
     card: PropTypes.object.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    connectDragSource: PropTypes.func.isRequired
+    editCard: PropTypes.func.isRequired,
+    removeCard: PropTypes.func.isRequired,
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      isHovering: false
+    }
+  }
+
+  submitEditCard = values => {
+    const {editCard, card: {id}} = this.props;
+    const {title, description}   = values;
+    editCard({
+      id,
+      title,
+      description
+    })
+    this.setState({isEditing: false});
+  }
+
+
   render() {
-    const {card: {title, description, createdAt}, connectDragSource, isDragging} = this.props;
+    const {
+            card: {id, title, laneId, description, transitionedAt},
+            removeCard,
+            connectDragSource,
+            isDragging
+          }                       = this.props;
+    const {isEditing, isHovering} = this.state;
+
     return connectDragSource(
-      <article className={`card ${isDragging ? 'card--is-dragging' : ''}`}>
-        <time className="card__time">{moment(createdAt).format('MM/DD/YYYY h:mm A')}</time>
-        <h1 className="card__title">{title}</h1>
-        <p className="card__description">{description}</p>
+      <article className={`card ${isDragging && 'card--is-dragging'} ${isHovering && 'card--is-hovering'}`}
+               onMouseEnter={_ => this.setState({isHovering: true})}
+               onMouseLeave={_ => this.setState({isHovering: false})}>
+        {(!isEditing && isHovering) &&
+        <Button className="pull-right glyphicon glyphicon-pencil"
+                onClick={_ => this.setState({isEditing: true})}></Button>
+        }
+
+        {!isEditing &&
+        <div>
+          <h1 className="card__title">{title}</h1>
+          <p className="card__description">{description}</p>
+          {transitionedAt &&
+          <p className="card__time">moved at:&nbsp;
+            <time>{moment(transitionedAt).format('MM/DD/YYYY h:mm A')}</time>
+          </p>
+          }
+        </div>
+        }
+
+        {isEditing &&
+        <Button className="remove-card pull-right glyphicon glyphicon-remove"
+                onClick={_ => removeCard({id})}></Button>
+        }
+
+        {isEditing &&
+        <CardForm
+          onSubmit={this.submitEditCard}
+          cancel={_ => this.setState({isEditing: false})}
+          laneId={laneId}/>
+        }
       </article>
     );
   }

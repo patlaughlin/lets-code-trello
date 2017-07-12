@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../actions';
 import {bindActionCreators} from 'redux';
-import {Button, FormGroup} from 'react-bootstrap';
-import {Field, reduxForm, getFormValues} from 'redux-form';
+import {Row, Col, Button, FormGroup} from 'react-bootstrap';
+import {Field, reduxForm} from 'redux-form';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 
@@ -17,6 +17,7 @@ const validate = values => {
 
 class CardForm extends Component {
   static propTypes = {
+    cancel: PropTypes.func.isRequired,
     laneId: PropTypes.number.isRequired,
     onSubmit: PropTypes.func.isRequired
   }
@@ -29,24 +30,35 @@ class CardForm extends Component {
   render() {
     let {handleSubmit, onSubmit} = this.props;
     return (
-      <form onSubmit={handleSubmit(onSubmit)} style={{marginTop: 0}}>
-        <FormGroup>
-          <Field
-            type="text"
-            component={Input}
-            name="title"
-            label="Title"
-          />
+      <form className="card-form" onSubmit={handleSubmit(onSubmit)} style={{marginTop: 0}}>
+        <Row>
+          <Col sm={12}>
+            <FormGroup>
+              <Field
+                type="text"
+                component={Input}
+                name="title"
+                label="Title"
+              />
 
-          <Field
-            type="textarea"
-            componentClass="textarea"
-            component={Input}
-            name="description"
-            label="Description"
-          />
-        </FormGroup>
-        <Button type="submit">Submit</Button>
+              <Field
+                type="textarea"
+                componentClass="textarea"
+                component={Input}
+                name="description"
+                label="Description"
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={12}>
+            <Button className="pull-left"
+                    onClick={this.props.cancel}>Cancel</Button>
+            <Button className="pull-right"
+                    type="submit">Submit</Button>
+          </Col>
+        </Row>
       </form>
     );
   }

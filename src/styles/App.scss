@@ -21,7 +21,15 @@ body {
   }
 }
 
+.drag-placeholder {
+  background: #bfbfbf;
+  border-radius: 3px;
+  height: 50px;
+  width: 100%;
+}
+
 .lane {
+  user-select: none;
   padding: 20px;
   background: #d9d9d9;
   border-radius: 3px;
@@ -69,6 +77,14 @@ body {
   }
 }
 
+input.warning {
+  border-color: red;
+}
+
+.card-form, .remove-card {
+  margin-bottom: 20px;
+}
+
 .card {
   padding: 10px;
   margin-bottom: 20px;
@@ -81,12 +97,20 @@ body {
     transform: rotateZ(2deg);
     box-shadow: 4px 4px 4px gray;
   }
+
+  @at-root #{&}--is-hovering {
+    background: #efefef;
+
+  }
   @at-root #{&}__title {
     font-weight: bold;
     font-size: 16px;
   }
   @at-root #{&}__description {
     font-size: 16px;
+  }
+  @at-root #{&}__time {
+    font-size: 10px;
   }
 
 }
