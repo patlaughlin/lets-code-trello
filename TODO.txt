@@ -1,6 +1,0 @@
-x The layout should contain three columns for statuses: To Do, In Progress, Done
-x Cards may be added/removed at will
-x Cards should contain a title and a description
-x Cards transition between statuses via drag/drop
-x The time should be recorded on the card upon transition
-x The application must be web based
