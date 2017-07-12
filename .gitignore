@@ -17,6 +17,7 @@
 .env.production.local
 
 TODO.txt
+.idea
 
 npm-debug.log*
 yarn-debug.log*
